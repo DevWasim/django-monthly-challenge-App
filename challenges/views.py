@@ -1,0 +1,34 @@
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+
+
+monthly_challenges = {
+    "january" : "it's january",
+    "feb" : "it's feb",
+    "march" : "it's march",
+    "apr" : "it's april",
+    "may" : "it's may",
+    "june" : "it's june",
+    "july" : "it's july",
+    "agust" : "it's agust",
+    "septemberr" : "it's september",
+    "octber" : "it's octber",
+    "november" : "it's november",
+    "december" : "it's december"
+
+}
+
+def monthly_challenges_by_int(request, month):
+    months = list(monthly_challenges.keys())
+    if month > len(months):
+        return HttpResponseNotFound(f"You Enterd a Wrong Month {month}")
+    redirect_month = months[month - 1]
+    redirect_path = reverse("month-challenge", args=[redirect_month])
+    return HttpResponseRedirect(redirect_path)
+def monthly_challenge(request, month):
+    try:
+        monthly_text = HttpResponse(monthly_challenges[month])
+    except:
+        monthly_text = HttpResponseNotFound(f"<h1> This month '{month}'is no registerd </h1>")
+    return HttpResponse(monthly_text)
