@@ -6,7 +6,7 @@ from django.urls import reverse
 
 monthly_challenges = {
     "january" : "it's january",
-    "feb" : "it's feb",
+    "feb" : None,
     "march" : "it's march",
     "apr" : "it's april",
     "may" : "it's may",
@@ -16,20 +16,22 @@ monthly_challenges = {
     "septemberr" : "it's september",
     "octber" : "it's octber",
     "november" : "it's november",
-    "december" : "it's december"
+    "december" : None
 
 }
 
 def index(request):
-    list_items = ""
+    # list_items = ""
     months = list(monthly_challenges.keys())
-
-    for month in months:
-        month_path = reverse("month-challenge", args=[month])
-        list_items += f'<li> <a href="{month_path}">{month.capitalize()} </a> </li>'
-
-    response_data = f"<ul>{list_items}</ul>"
-    return HttpResponse(response_data)
+    #
+    # for month in months:
+    #     month_path = reverse("month-challenge", args=[month])
+    #     list_items += f'<li> <a href="{month_path}">{month.capitalize()} </a> </li>'
+    #
+    # response_data = f"<ul>{list_items}</ul>"
+    return render(request, "challenges/index.html", {
+        'months': months
+    })
 
 
 def monthly_challenges_by_int(request, month):
@@ -45,7 +47,7 @@ def monthly_challenge(request, month):
         monthly_text = monthly_challenges[month]
         return render(request,"challenges/challenges.html", {
             'text': monthly_text,
-            'month': month.capitalize
+            'month': month
             })
     except:
         monthly_text = HttpResponseNotFound(f"<h1> This month '{month}'is no registerd </h1>")

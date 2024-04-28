@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block page_title %}
+    All Months
+{% endblock %}
+
+{% block content %}
+<ul>
+    <li>
+        {% for month in months %}
+        <a href="{{ month }}">{{ month|title }}</a> <br>
+        {% endfor %}
+    </li>
+</ul>
+
+{% endblock %}
