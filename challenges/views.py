@@ -50,6 +50,6 @@ def monthly_challenge(request, month):
             'month': month
             })
     except:
-        monthly_text = HttpResponseNotFound(f"<h1> This month '{month}'is no registerd </h1>")
-    return HttpResponse(monthly_text)
+        response_data = render_to_string("404.html")
+        return HttpResponseNotFound(response_data)
 

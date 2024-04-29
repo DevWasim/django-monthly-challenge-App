@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{% static "challenges/challenges.css" %}">
+{%endblock %}
+
+
 {% block page_title %}
     All Months
 {% endblock %}

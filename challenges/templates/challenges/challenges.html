@@ -1,18 +1,13 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block page_title %}{{ month|title }} Challenge {% endblock %}
-{% block styles %}
-    body {
-        background-color: orchid;
-        backdrop-filter: blur(100%);
-    }
-{% endblock %}
+<link rel="stylesheet" href="{% static '/challenges/challenge.css' %}">
 
 {% block content %}
 {% include 'challenges/includes/header.html' %}
 <h1>{{ month|title }} Challenge</h1>
 {% if text == None %}
-    its {{ month|title }}
+    <p class="fallback"> its {{ month|title }}</p>
 {% else %}
     <p>{{ text }}</p>
 {% endif %}
